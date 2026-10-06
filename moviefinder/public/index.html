@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0e1120" />
+  <title>ReelFind – Search movies</title>
+  <meta name="description" content="Search any movie and see its poster, rating, release date, genres and plot." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎞️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { ink: '#0e1120', panel: '#171b30', line: '#2a3050', gold: '#f3b95f', mist: '#a4abc8' },
+      fontFamily: { display: ['Fraunces', 'serif'], sans: ['DM Sans', 'sans-serif'] }
+    } } };
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-ink text-slate-100 font-sans antialiased min-h-screen">
+
+  <header class="hero">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-10 sm:pt-14 sm:pb-14">
+      <a href="/" class="inline-flex items-center gap-2 font-display font-extrabold text-xl text-gold" aria-label="ReelFind home">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 3v18M17 3v18M3 8h4M3 16h4M17 8h4M17 16h4"/></svg>
+        ReelFind
+      </a>
+      <h1 class="font-display font-extrabold text-4xl sm:text-6xl leading-[1.05] mt-8 max-w-2xl">Find your next movie night.</h1>
+      <p class="text-mist mt-4 max-w-xl text-base sm:text-lg">Search by title to see posters, ratings, release dates, genres and the full plot.</p>
+
+      <form id="searchForm" class="mt-8 flex flex-col sm:flex-row gap-3 max-w-2xl" role="search">
+        <div class="relative flex-1">
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 text-mist" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="searchInput" type="search" autocomplete="off" placeholder="Search movies, e.g. Inception" aria-label="Search movies by title"
+                 class="w-full h-14 pl-12 pr-4 rounded-xl bg-panel border border-line text-base placeholder-mist/70 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30" />
+        </div>
+        <button type="submit" class="h-14 px-8 rounded-xl bg-gold text-ink font-bold hover:brightness-110 active:scale-[.98] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 pb-16" id="main">
+    <div class="flex items-end justify-between gap-4 mb-5">
+      <h2 id="sectionTitle" class="font-display font-semibold text-2xl sm:text-3xl">Trending this week</h2>
+      <p id="resultCount" class="text-mist text-sm"></p>
+    </div>
+
+    <div id="status" role="status" aria-live="polite"></div>
+    <div id="grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"></div>
+
+    <div class="text-center mt-10">
+      <button id="loadMore" class="hidden px-8 h-12 rounded-xl border border-line bg-panel hover:border-gold transition font-medium">Show more movies</button>
+    </div>
+  </main>
+
+  <footer class="border-t border-line py-8 text-center text-sm text-mist px-4">
+    Movie data from <a class="text-gold underline" href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDB</a>. This product uses the TMDB API but is not endorsed or certified by TMDB.
+  </footer>
+
+  <!-- Details modal -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel">
+      <button class="modal-close" data-close aria-label="Close details">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

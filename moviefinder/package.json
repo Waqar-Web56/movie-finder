@@ -1,0 +1,8 @@
+{
+  "name": "reelfind",
+  "version": "1.0.0",
+  "description": "Movie search website powered by TMDB",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}
